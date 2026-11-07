@@ -6,6 +6,7 @@
 
 #include "mpi.h"
 #include "stdio.h"
+#include "stdlib.h"
 
 void Mat_vect_mult(
 	double local_A[],
@@ -36,7 +37,7 @@ void Mat_vect_mult(
 	int local_ok = 1;
 
 	x = malloc(n *sizeof(double));
-	MPI_Allgather(local_x, local_n, MPI_DOUBLE, x, local_n, MPI_DOUBLE);
+	MPI_Allgather(local_x, local_n, MPI_DOUBLE, x, local_n, MPI_DOUBLE, comm);
 	
 	for (local_i = 0; local_i < local_m; local_i++) {
 		local_y[local_i] = 0.0;
